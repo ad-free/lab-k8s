@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-## lab-k8s
-
-### Author
-
-
-### License
-=======
 # lab-k8s
 
 #### Tutorial
