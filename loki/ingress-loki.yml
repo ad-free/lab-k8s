@@ -1,13 +1,14 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ingress-grafana
+  name: ingress-loki
+  namespace: monitoring
 spec:
   rules:
-    - host: k8s.grafana.local
+    - host: k8s.loki.local
       http:
         paths:
           - path: /
             backend:
-              serviceName: grafana
-              servicePort: 80
+              serviceName: loki
+              servicePort: 3100

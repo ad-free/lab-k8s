@@ -1,12 +1,14 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-    name: ingress-prometheus
+  name: ingress-prometheus
+  namespace: monitoring
 spec:
   rules:
-  - http:
+    - host: k8s.prometheus.local
+      http:
         paths:
-        - path: /
-          backend:
-             serviceName: prometheus
-             servicePort: 8080
+          - path: /
+            backend:
+              serviceName: prometheus
+              servicePort: 9090

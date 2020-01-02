@@ -2,15 +2,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus
+  namespace: monitoring
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: prometheus
+      app: prometheus-server
   template:
     metadata:
       labels:
-        name: prometheus
+        app: prometheus-server
     spec:
       containers:
         - name: prometheus
@@ -30,6 +31,6 @@ spec:
           configMap:
             defaultMode: 420
             name: prometheus-server-conf
-  
+
         - name: prometheus-storage-volume
           emptyDir: {}
