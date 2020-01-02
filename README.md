@@ -39,13 +39,13 @@ If you run on the Windows:
 
 ## Installed softwares
 
-1) Grafana
-2) Loki
-3) Prometheus
-4) Redis        **(comming soon)**
-5) MySQL        **(comming soon)**
-6) Postgres     **(comming soon)**
-7) Promtail     **(comming soon)**
+1. Grafana
+2. Loki
+3. Prometheus
+4. Redis        **(comming soon)**
+5. MySQL        **(comming soon)**
+6. Postgres     **(comming soon)**
+7. Promtail     **(comming soon)**
 
 ## Author
 
