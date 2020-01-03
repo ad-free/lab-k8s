@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-promtail
+  namespace: monitoring
+spec:
+  rules:
+    - host: k8s.promtail.local
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: promtail
+              servicePort: 3200

@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: promtail
+  labels:
+    name: promtail
+  namespace: monitoring
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: promtail
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: promtail
+    spec:
+      containers:
+        - image: grafana/promtail:latest
+          name: promtail
+          resources:
+            limits:
+              cpu: 3
+              memory: 4Gi
+            requests:
+              cpu: 2
+              memory: 2Gi
+          args:
+            - -client.url=http://10.1.80.15:3100/loki/api/prom/push # TOOD(adam): HTTPS
+            - -config.file=/etc/promtail/promtail.yml
+          env:
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          ports:
+            - containerPort: 3200
+              name: http-metrics
+          volumeMounts:
+            - mountPath: /etc/promtail
+              name: promtail
+            - mountPath: /var/log
+              name: varlog
+            - mountPath: /var/lib/docker/containers
+              name: varlibdockercontainers
+              readOnly: true
+      volumes:
+        - configMap:
+            name: promtail
+          name: promtail
+        - hostPath:
+            path: /var/log
+          name: varlog
+        - hostPath:
+            path: /var/lib/docker/containers
+          name: varlibdockercontainers
+      restartPolicy: Always
