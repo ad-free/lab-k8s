@@ -11,8 +11,15 @@ data:
     positions:
       filename: /tmp/positions.yaml
     clients:
-      - url: http://10.1.80.15:3100/loki/api/v1/push
+      - url: http://10.1.80.15:3100/api/prom/push
     scrape_configs:
+    - job_name: system
+      static_configs:
+      - targets:
+          - 10.1.80.15
+        labels:
+          job: varlogs
+          __path__: /var/log/*log
     - job_name: kubernetes-pods
       kubernetes_sd_configs:
       - role: pod
@@ -31,6 +38,10 @@ data:
         - __meta_kubernetes_namespace
         - __meta_kubernetes_pod_label_name
         target_label: job
+      - action: drop
+        regex: default
+        source_labels:
+        - __meta_kubernetes_namespace
       - action: replace
         source_labels:
         - __meta_kubernetes_namespace
@@ -39,7 +50,13 @@ data:
         source_labels:
         - __meta_kubernetes_pod_name
         target_label: instance
-      - replacement: /var/log/pods/$1
+      - action: replace
+        source_labels:
+        - __meta_kubernetes_pod_container_name
+        target_label: container_name
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_(.+)
+      - replacement: /var/log/pods/$1/*.log
         separator: /
         source_labels:
         - __meta_kubernetes_pod_uid
@@ -53,9 +70,9 @@ data:
         - __meta_kubernetes_pod_node_name
         target_label: __host__
       - action: drop
-        regex: ^$
+        regex: .+
         source_labels:
-        - __meta_kubernetes_pod_label_app
+        - __meta_kubernetes_pod_label_name
       - action: replace
         replacement: $1
         separator: /
@@ -63,6 +80,10 @@ data:
         - __meta_kubernetes_namespace
         - __meta_kubernetes_pod_label_app
         target_label: job
+      - action: drop
+        regex: default
+        source_labels:
+        - __meta_kubernetes_namespace
       - action: replace
         source_labels:
         - __meta_kubernetes_namespace
@@ -71,9 +92,15 @@ data:
         source_labels:
         - __meta_kubernetes_pod_name
         target_label: instance
+      - action: replace
+        source_labels:
+        - __meta_kubernetes_pod_container_name
+        target_label: container_name
       - action: labelmap
         regex: __meta_kubernetes_pod_label_(.+)
-      - replacement: /var/log/pods/*$1*/*/*.log
+      - replacement: /var/log/pods/$1/*.log
+        separator: /
         source_labels:
-          - __meta_kubernetes_pod_uid
+        - __meta_kubernetes_pod_uid
+        - __meta_kubernetes_pod_container_name
         target_label: __path__

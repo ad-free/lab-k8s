@@ -31,8 +31,8 @@ spec:
               cpu: 2
               memory: 2Gi
           args:
-            - -client.url=http://10.1.80.15:3100/loki/api/prom/push # TOOD(adam): HTTPS
-            - -config.file=/etc/promtail/promtail.yml
+            - "-client.url=http://10.1.80.15:3100/api/prom/push"
+            - "-config.file=/etc/promtail/promtail.yml"
           env:
             - name: HOSTNAME
               valueFrom:
