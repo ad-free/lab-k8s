@@ -31,7 +31,7 @@ spec:
               cpu: 2
               memory: 2Gi
           args:
-            - "-client.url=http://10.152.183.35:3100/api/prom/push"
+            - "-client.url=http://10.0.2.15:32215/api/prom/push"
             - "-config.file=/etc/promtail/promtail.yml"
           env:
             - name: HOSTNAME
