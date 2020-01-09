@@ -31,7 +31,7 @@ spec:
               cpu: 2
               memory: 2Gi
           args:
-            - "-client.url=http://10.1.80.15:3100/api/prom/push"
+            - "-client.url=http://10.152.183.35:3100/api/prom/push"
             - "-config.file=/etc/promtail/promtail.yml"
           env:
             - name: HOSTNAME
@@ -46,9 +46,6 @@ spec:
               name: promtail
             - mountPath: /var/log
               name: varlog
-            - mountPath: /var/lib/docker/containers
-              name: varlibdockercontainers
-              readOnly: true
       volumes:
         - configMap:
             name: promtail
@@ -56,7 +53,4 @@ spec:
         - hostPath:
             path: /var/log
           name: varlog
-        - hostPath:
-            path: /var/lib/docker/containers
-          name: varlibdockercontainers
       restartPolicy: Always
