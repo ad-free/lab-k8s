@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - args:
-            - "-client.url=http://10.1.80.15:3100/api/prom/push"
+            - "-client.url=http://10.0.2.15:32215/api/prom/push"
             - "-config.file=/etc/promtail/promtail.yml"
           env:
             - name: HOSTNAME
