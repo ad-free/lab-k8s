@@ -1,10 +1,4 @@
 apiVersion: v1
-kind: Service
+kind: Namespace
 metadata:
-  name: grafana
-spec:
-  selector:
-    app: grafana
-  ports:
-    - port: 3000
-      targetPort: 3000
+  name: monitoring
