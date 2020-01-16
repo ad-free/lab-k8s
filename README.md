@@ -58,6 +58,7 @@ Email: noname.spyware@gmail.com
 1. https://devopscube.com/setup-grafana-kubernetes/
 2. https://johnharris.io/2019/03/dynamic-configuration-discovery-in-grafana/
 3. https://github.com/cndies/grafana5-provisioning-example/tree/master/grafana
+4. https://56k.cloud/blog/provisioning-grafana-datasources-and-dashboards-automagically/
 
 ## License
 
