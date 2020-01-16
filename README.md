@@ -53,6 +53,12 @@ Nickname: Free
 
 Email: noname.spyware@gmail.com
 
+## References
+
+1. https://devopscube.com/setup-grafana-kubernetes/
+2. https://johnharris.io/2019/03/dynamic-configuration-discovery-in-grafana/
+3. https://github.com/cndies/grafana5-provisioning-example/tree/master/grafana
+
 ## License
 
 MIT
