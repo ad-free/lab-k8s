@@ -153,4 +153,4 @@ data:
 
       - job_name: 'loki'
         static_configs:
-          - targets: ['10.1.80.15:3100']
+          - targets: ['10.96.116.145:3100']

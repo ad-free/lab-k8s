@@ -55,7 +55,10 @@ spec:
             - name: config
               mountPath: /etc/grafana
             - name: log
-              mountPath: /var/log/grafana  
+              mountPath: /var/log/grafana
+            - name: grafana-datasources
+              mountPath: /etc/grafana/provisioning/datasources
+              readOnly: false
             
       restartPolicy: Always
       securityContext: {}
@@ -66,5 +69,9 @@ spec:
         - name: config
           configMap:
             name: grafana-config
+        - name: grafana-datasources
+          configMap:
+            defaultMode: 420
+            name: grafana-datasources
         - name: log
           emptyDir: {}

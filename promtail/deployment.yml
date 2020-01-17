@@ -6,7 +6,7 @@ metadata:
     name: promtail
   namespace: monitoring
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       name: promtail
@@ -21,8 +21,13 @@ spec:
         name: promtail
     spec:
       containers:
-        - image: grafana/promtail:latest
-          name: promtail
+        - name: random-logger
+          image: chentex/random-logger
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /home/slog
+        - name: promtail
+          image: grafana/promtail:latest
           resources:
             limits:
               cpu: 3
@@ -44,13 +49,12 @@ spec:
           volumeMounts:
             - mountPath: /etc/promtail
               name: promtail
-            - mountPath: /var/log
-              name: varlog
+            - name: shared-logs
+              mountPath: /home/slog
       volumes:
-        - configMap:
+        - name: promtail
+          configMap:
             name: promtail
-          name: promtail
-        - hostPath:
-            path: /var/log
-          name: varlog
+        - name: shared-logs
+          emptyDir: {}
       restartPolicy: Always

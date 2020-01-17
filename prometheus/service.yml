@@ -10,9 +10,7 @@ metadata:
 spec:
   selector:
     app: prometheus-server
-  type: LoadBalancer
-  externalIPs:
-    - 10.0.2.15
+  type: NodePort
   ports:
     - port: 9090
       targetPort: 9090
