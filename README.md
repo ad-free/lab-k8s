@@ -60,6 +60,7 @@ Email: noname.spyware@gmail.com
 3. https://github.com/cndies/grafana5-provisioning-example/tree/master/grafana
 4. https://56k.cloud/blog/provisioning-grafana-datasources-and-dashboards-automagically/
 5. https://github.com/grafana/grafana/blob/master/devenv/datasources.yaml
+6. https://github.com/projectcontour/gimbal/blob/master/deployment/grafana/03-grafana-deployment.yaml
 
 ## License
 
