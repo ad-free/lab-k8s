@@ -20,11 +20,11 @@ data:
     [paths]
     # Path to where grafana can store temp files, sessions, and the sqlite3 db (if that is used)
     #
-    ;data = /var/lib/grafana
+    data = /var/lib/grafana
     #
     # Directory where grafana can store logs
     #
-    ;logs = /var/log/grafana
+    logs = /var/log/grafana
     #
     # Directory where grafana will automatically scan and look for plugins
     #
@@ -79,8 +79,13 @@ data:
     ;host = 127.0.0.1:3306
     ;name = grafana
     ;user = root
+
+    type = mysql
+    host = 10.0.2.15:30572
+    name = grafana
+    user = root
     # If the password contains # or ; you have to wrap it with trippel quotes. Ex """#password;"""
-    ;password =
+    password = admin
 
     # Use either URL or the previous fields to configure the database
     # Example: mysql://user:secret@host:port/database
