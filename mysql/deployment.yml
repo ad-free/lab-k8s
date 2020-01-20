@@ -17,15 +17,20 @@ spec:
         - image: mysql:latest
           name: mysql
           env:
+            - name: MYSQL_USER
+              value: admin
             - name: MYSQL_ROOT_PASSWORD
               value: admin
           ports:
             - containerPort: 3306
               name: mysql
           volumeMounts:
-            - name: mysql-persistent-storage
+            - name: mysql-storage
               mountPath: /var/lib/mysql
+            - name: mysql-log
+              mountPath: /var/log/mysql
       volumes:
-        - name: mysql-persistent-storage
-          persistentVolumeClaim:
-            claimName: mysql-pv-claim
+        - name: mysql-storage
+          emptyDir: {}
+        - name: mysql-log
+          emptyDir: {}

@@ -30,7 +30,7 @@ If you run on the Linux:
    - `sudo snap install microk8s --classic`
 
 3. With **minikube**:
-   - Install [here](https://www.howtoforge.com/tutorial/how-to-install-kubernetes-with-minikube-on-ubuntu-1804-lts/)
+   - Install [minikube](https://www.howtoforge.com/tutorial/how-to-install-kubernetes-with-minikube-on-ubuntu-1804-lts/)
 
 If you run on the Windows:
 
@@ -43,9 +43,9 @@ If you run on the Windows:
 2. Loki
 3. Prometheus
 4. Redis        **(comming soon)**
-5. MySQL        **(comming soon)**
+5. MySQL
 6. Postgres     **(comming soon)**
-7. Promtail     **(comming soon)**
+7. Promtail
 
 ## Author
 
