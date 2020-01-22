@@ -36,14 +36,9 @@ spec:
         name: grafana
     spec:
       containers:
-        - image: grafana/grafana
-          imagePullPolicy: IfNotPresent
+        - image: grafana/grafana:6.5.3
+          imagePullPolicy: Always
           name: grafana
-          command:
-            - bash
-          args:
-            - -c
-            - source ~/.bashrc
           ports:
             - containerPort: 3000
               protocol: TCP
@@ -60,12 +55,17 @@ spec:
               mountPropagation: HostToContainer
             - name: data
               mountPath: /var/lib/grafana
+            - name: dashboards-volume
+              mountPath: /var/lib/grafana/dashboards
             - name: config
               mountPath: /etc/grafana
             - name: log
               mountPath: /var/log/grafana
             - name: grafana-datasources
               mountPath: /etc/grafana/provisioning/datasources
+              readOnly: false
+            - name: grafana-dash-provider
+              mountPath: /etc/grafana/provisioning/dashboards
               readOnly: false
             
       restartPolicy: Always
@@ -80,9 +80,16 @@ spec:
         - name: config
           configMap:
             name: grafana-config
+        - name: dashboards-volume
+          configMap:
+            name: grafana-dashs
         - name: grafana-datasources
           configMap:
             defaultMode: 420
             name: grafana-datasources
+        - name: grafana-dash-provider
+          configMap:
+            defaultMode: 420
+            name: grafana-provider
         - name: log
           emptyDir: {}

@@ -28,7 +28,7 @@ data:
     #
     # Directory where grafana will automatically scan and look for plugins
     #
-    ;plugins = /var/lib/grafana/plugins
+    plugins = /var/lib/grafana/plugins
 
     #
     #################################### Server ####################################
@@ -85,6 +85,7 @@ data:
     host = 10.0.2.15:30572
     name = grafana
     user = root
+    password = admin
 
     # Use either URL or the previous fields to configure the database
     # Example: mysql://user:secret@host:port/database
@@ -143,7 +144,7 @@ data:
     # in some UI views to notify that grafana or plugin update exists
     # This option does not cause any auto updates, nor send any information
     # only a GET request to http://grafana.com to get latest versions
-    ;check_for_updates = true
+    check_for_updates = true
 
     # Google Analytics universal tracking code, only enabled if you specify an id here
     ;google_analytics_ua_id =
@@ -185,7 +186,7 @@ data:
     #################################### Users ####################################
     [users]
     # disable user signup / registration
-    allow_sign_up = true
+    ;allow_sign_up = true
 
     # Allow non admin users to create organizations
     ;allow_org_create = true
@@ -370,8 +371,8 @@ data:
 
     ;#################################### Dashboard JSON files ##########################
     [dashboards.json]
-    ;enabled = false
-    ;path = /var/lib/grafana/dashboards
+    enabled = false
+    path = /var/lib/grafana/dashboards
 
     #################################### Alerting ############################
     [alerting]
@@ -398,7 +399,7 @@ data:
     #################################### Grafana.com integration  ##########################
     # Url used to to import dashboards directly from Grafana.com
     [grafana_com]
-    ;url = https://grafana.com
+    url = https://grafana.com
 
     #################################### External image storage ##########################
     [external_image_storage]
