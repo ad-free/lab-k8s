@@ -16,11 +16,20 @@ spec:
       containers:
         - image: mysql:latest
           name: mysql
+#          command:
+#            - bash
+#          args:
+#            - -c
+#            - source ~/.bashrc
           env:
+            - name: MYSQL_DATABASE
+              value: $MYSQL_DATABASE
             - name: MYSQL_USER
-              value: admin
+              value: $MYSQL_USER
             - name: MYSQL_ROOT_PASSWORD
-              value: admin
+              value: $MYSQL_ROOT_PASSWORD
+            - name: MYSQL_PASSWORD
+              value: $MYSQL_PASSWORD
           ports:
             - containerPort: 3306
               name: mysql
