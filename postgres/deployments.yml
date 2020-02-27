@@ -29,12 +29,15 @@ spec:
       containers:
       - name: postgresql
         image: postgres:latest
+        command:
+          - bash
+        args:
+          - -c
+          - source ~/.bashrc && exec /docker-entrypoint.sh postgres
         env:
           - name: POSTGRES_DB
             value: lab_k8s
           - name: POSTGRES_USER
-            value: admin
-          - name: POSTGRES_PASSWORD
             value: admin
           - name: PGUSER
             value: free

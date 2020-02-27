@@ -51,6 +51,7 @@ data:
     systemd-coredump:x:999:999:systemd Core Dumper:/:/usr/sbin/nologin
     vboxadd:x:998:1::/var/run/vboxadd:/bin/false
     mysql:x:125:132:MySQL Server,,,:/nonexistent:/bin/false
+    postgres:x:126:134:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash
   shadown: |
     root:!:18305:0:99999:7:::
     daemon:*:18186:0:99999:7:::
@@ -99,6 +100,7 @@ data:
     systemd-coredump:!!:18305::::::
     vboxadd:!:18305::::::
     mysql:!:18317:0:99999:7:::
+    postgres:*:18319:0:99999:7:::
   group: |
     root:x:0:
     daemon:x:1:
@@ -176,3 +178,4 @@ data:
     microk8s:x:997:free
     mysql:x:132:
     docker:x:133:
+    postgres:x:134:
