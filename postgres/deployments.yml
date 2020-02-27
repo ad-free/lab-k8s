@@ -1,34 +1,72 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql
+  labels:
+    app: postgresql
+spec:
+  ports:
+  - name: postgresql
+    port: 5432
+    targetPort: 5432
+  selector:
+    app: postgresql
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: postgresql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
-  strategy:
-    type: Recreate
+      name: postgresql
   template:
     metadata:
       labels:
-        app: postgres
+        name: postgresql
     spec:
       containers:
-        - image: "postgres:latest"
-          name: postgres
-          command:
-            - bash
-          args:
-            - -c
-            - source ~/.bashrc
-          ports:
-            - containerPort: 5432
-              name: postgres
-          volumeMounts:
-            - name: postgres-storage
-              mountPath: /var/lib/postgresql/
+      - name: postgresql
+        image: postgres:latest
+        env:
+          - name: POSTGRES_DB
+            value: lab_k8s
+          - name: POSTGRES_USER
+            value: admin
+          - name: POSTGRES_PASSWORD
+            value: admin
+          - name: PGUSER
+            value: free
+          - name: PGDATA
+            value: /data/postgres
+          - name: POSTGRES_INIT_ARGS
+            value: ""
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+        - name: home
+          mountPropagation: HostToContainer
+          mountPath: /home/free
+#        - name: userinfo
+#          mountPath: /etc/passwd
+#          subPath: passwd
+#        - name: userinfo
+#          mountPath: /etc/group
+#          subPath: group
+#        - name: userinfo
+#          mountPath: /etc/shadow
+#          subPath: shadown
+        - name: postgresql-storage-volume
+          mountPath: /data
       volumes:
-        - name: postgres-storage
-          persistentVolumeClaim:
-            claimName: postgres-pv-claim
+      - name: home
+        hostPath:
+          path: /home/free
+#      - name: userinfo
+#        configMap:
+#          defaultMode: 0666
+#          name: common-userinfo-configmap
+      - name: postgresql-storage-volume
+        persistentVolumeClaim:
+          claimName: postgresql-storage-volume

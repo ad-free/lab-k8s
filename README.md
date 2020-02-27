@@ -44,8 +44,13 @@ If you run on the Windows:
 3. Prometheus
 4. Redis        **(comming soon)**
 5. MySQL
-6. Postgres     **(comming soon)**
+6. Postgres
 7. Promtail
+
+## Addons (Use microk8s)
+
+1. `microk8s.enable storage`
+2. `microk8s.enable dashboard`
 
 ## Author
 
