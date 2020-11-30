@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1 
+kind: Ingress
+metadata:
+   name: matomo
+spec:
+   rules:
+      - host: k8s.matomo.local
+        http:
+           paths:
+            - path: /
+              backend:
+                 serviceName: matomo
+                 servicePort: 80
