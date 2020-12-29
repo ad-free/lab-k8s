@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matomo
+spec:
+  selector:
+    matchLabels:
+      app: matomo
+  template:
+    metadata:
+      labels:
+        app: matomo
+    spec:
+      containers:
+        - name: matomo
+          image: matomo:4.1.0
+          resources:
+            limits:
+              memory: "3Gi"
+              cpu: "300m"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: matomo-storage
+              mountPath: /var/www/html
+            - name: matomo-config
+              mountPath: /var/www/html/configs
+      volumes:
+        - name: matomo-storage
+          emptyDir: {}
+        - name: matomo-config
+          emptyDir: {}
